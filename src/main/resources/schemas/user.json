@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "User",
+    "description": "Validates a user object for login attempts",
+    "type": "object",
+    "properties": {
+      "email": {
+        "description": "User's email address",
+        "type": "string",
+        "format": "email", 
+        "minLength": 8, 
+        "maxLength": 128  
+      },
+      "password": {
+        "description": "User's password",
+        "type": "string",
+        "minLength": 6, 
+        "maxLength": 64,  
+        "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{6,}$"
+      }
+    },
+    "required": ["email", "password"]
+  }
+  

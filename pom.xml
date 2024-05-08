@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.2.5</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.example</groupId>
+	<artifactId>examen</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>examen</name>
+	<description>examen</description>
+	<properties>
+		<java.version>17</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        
+		<dependency>
+        	<groupId>org.springdoc</groupId>
+        	<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+        	<version>2.2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
+		<dependency>
+		    <groupId>com.newrelic.agent.java</groupId>
+		    <artifactId>newrelic-java</artifactId>
+		    <version>8.11.1</version>
+		    <scope>provided</scope>
+		    <type>zip</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.networknt</groupId>
+			<artifactId>json-schema-validator</artifactId>
+			<version>1.4.0</version>
+		</dependency>
+
+		<dependency>
+    		<groupId>io.swagger.core.v3</groupId>
+    		<artifactId>swagger-annotations</artifactId>
+    		<version>2.1.11</version> <!-- o la versión más reciente -->
+		</dependency>
+
+		
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+      <groupId>io.sentry</groupId>
+      <artifactId>sentry-maven-plugin</artifactId>
+      <version>0.0.8</version>
+      <extensions>true</extensions>
+      <configuration>
+        <debugSentryCli>true</debugSentryCli>
+
+        <org>myorg-ib</org>
+
+        <project>examen</project>
+
+        <authToken>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</authToken>
+      </configuration>
+      <executions>
+        <execution>
+          <goals>
+            <goal>uploadSourceBundle</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+
+	<!-- Unzip New Relic Java agent into target/ -->
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-dependency-plugin</artifactId>
+<version>3.1.1</version>
+<executions>
+    <execution>
+    <id>unpack-newrelic</id>
+    <phase>package</phase>
+    <goals>
+        <goal>unpack-dependencies</goal>
+    </goals>
+    <configuration>
+        <includeGroupIds>com.newrelic.agent.java</includeGroupIds>
+        <includeArtifactIds>newrelic-java</includeArtifactIds>
+        <!-- you can optionally exclude files -->
+        <overWriteReleases>false</overWriteReleases>
+        <overWriteSnapshots>false</overWriteSnapshots>
+        <overWriteIfNewer>true</overWriteIfNewer>
+        <outputDirectory>${project.build.directory}</outputDirectory>
+    </configuration>
+    </execution>
+</executions>
+</plugin>
+
+
+		</plugins>
+	</build>
+
+</project>
